@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import './CategorySelection.css';
 
-const CategorySelection = ({ categories, onSelectCategory, onBack }) => {
+const CategorySelection = ({ categories, onCategorySelected, onBack }) => {
   // Group categories by type for better organization
   const groupedCategories = {
     'Knowledge': categories.filter(cat => cat.name.includes('Knowledge') || cat.name.includes('Science') || cat.name.includes('History')),
@@ -42,7 +42,7 @@ const CategorySelection = ({ categories, onSelectCategory, onBack }) => {
                   <motion.div
                     key={category.id}
                     className="category-card"
-                    onClick={() => onSelectCategory(category.id)}
+                    onClick={() => onCategorySelected(category.id, category.name)}
                     whileHover={{ y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}
                     whileTap={{ y: 0, boxShadow: '0 5px 10px rgba(0,0,0,0.1)' }}
                   >
@@ -56,17 +56,17 @@ const CategorySelection = ({ categories, onSelectCategory, onBack }) => {
       </div>
       
       <div className="category-actions">
-        <motion.button 
-          className="back-button"
-          onClick={onBack}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Back
-        </motion.button>
+           <motion.button 
+             className="back-button"
+             onClick={() => onBack()}
+             whileHover={{ scale: 1.05 }}
+             whileTap={{ scale: 0.95 }}
+           >
+             Back
+           </motion.button>
         <motion.button 
           className="random-button"
-          onClick={() => onSelectCategory('')}
+          onClick={() => onCategorySelected('', 'Random')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

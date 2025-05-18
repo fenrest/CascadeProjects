@@ -7,7 +7,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import UserRegistration from './components/UserRegistration';
 import CategorySelection from './components/CategorySelection';
-import QuizSetup from './components/QuizSetup';
+import DifficultySelection from './components/DifficultySelection';
 import Leaderboard from './components/Leaderboard';
 import { getUsername, saveUsername } from './utils/storage';
 import { fetchQuizData, fetchCategories } from './services/api';
@@ -15,6 +15,13 @@ import { getTheme, applyTheme, initializeThemeSystem } from './utils/themes';
 import { getAllScores, saveScoreToDb, getUserScores, getTopScores } from './utils/database';
 
 function App() {
+  // Initialize theme system with the current theme
+  useEffect(() => {
+    // Apply the current theme on initial load
+    applyTheme(currentTheme);
+    // Initialize the theme system for system preference detection
+    initializeThemeSystem();
+  }, []);
   // Quiz data and answers
   const [quizData, setQuizData] = useState(null);
   const [userAnswers, setUserAnswers] = useState([]);
@@ -36,21 +43,16 @@ function App() {
     initializeThemeSystem();
   }, []);
   
-  // Selected category for quiz
-  const [selectedCategory, setSelectedCategory] = useState({
-    id: '',
-    name: ''
-  });
-  
-  // Quiz options
+  // Quiz options - categoryId will store the ID, categoryName for display
   const [quizOptions, setQuizOptions] = useState({
     amount: 5,
-    category: '',
+    categoryId: '', 
+    categoryName: '',
     difficulty: '',
     type: 'multiple'
   });
   
-  // App screens
+  // App screens: 'landing', 'registration', 'categorySelection', 'difficultySelection', 'quiz', 'results', 'leaderboard'
   const [currentScreen, setCurrentScreen] = useState('landing');
 
   useEffect(() => {
@@ -84,7 +86,7 @@ function App() {
   const handleRegister = (username) => {
     setUsername(username);
     saveUsername(username);
-    setCurrentScreen('landing');
+    setCurrentScreen('categorySelection'); // Go to Category Selection after registration
   };
   
   // Handle start quiz from landing page
@@ -93,21 +95,37 @@ function App() {
     if (!username) {
       setCurrentScreen('registration');
     } else {
-      setCurrentScreen('categories');
+      setCurrentScreen('categorySelection'); // Go to Category Selection if user exists
     }
   };
   
-  // Handle category selection
-  const handleCategorySelect = (categoryId) => {
-    const selectedCat = categories.find(cat => cat.id === categoryId) || { id: '', name: 'Random' };
-    setSelectedCategory(selectedCat);
-    setCurrentScreen('setup');
+  // Handle category selection - New Step 2
+  const handleCategorySelected = (categoryId, categoryName) => {
+    setQuizOptions(prevOptions => ({
+      ...prevOptions,
+      categoryId: categoryId,
+      categoryName: categoryName
+    }));
+    setCurrentScreen('difficultySelection');
+    window.history.pushState({}, '', '/difficulty'); // Add to history stack
   };
   
-  // Handle quiz setup and start
-  const handleQuizSetup = (options) => {
-    setQuizOptions(options);
-    loadQuizData(options);
+  // Handle difficulty selection and start quiz - New Step 3
+  const handleDifficultySelected = (difficulty, amount, type) => {
+    const updatedOptions = {
+      ...quizOptions,
+      difficulty,
+      amount,
+      type
+    };
+    setQuizOptions(updatedOptions);
+    // Construct options for API: categoryId maps to 'category' for fetchQuizData
+    loadQuizData({ 
+      amount: updatedOptions.amount,
+      category: updatedOptions.categoryId, // API expects 'category' for ID
+      difficulty: updatedOptions.difficulty,
+      type: updatedOptions.type
+    });
   };
   
   // Handle quiz completion
@@ -128,7 +146,7 @@ function App() {
     const scoreData = {
       username,
       score: percentage,
-      category: selectedCategory.name,
+      category: quizOptions.categoryName, // Use categoryName from quizOptions
       difficulty: quizOptions.difficulty || 'Any',
       date: new Date().toISOString()
     };
@@ -141,42 +159,68 @@ function App() {
   // Handle restart quiz
   const handleRestart = () => {
     setUserAnswers([]);
-    setCurrentScreen('setup');
+    // Reset parts of quizOptions for a fresh start, keep username
+    setQuizOptions(prev => ({ 
+        ...prev,
+        categoryId: '', 
+        categoryName: '',
+        difficulty: '', 
+        amount: 5, 
+        type: 'multiple' 
+    }));
+    setCurrentScreen('categorySelection'); // Or 'difficultySelection' if preferred
   };
   
   // Handle back to home or previous screen
   const handleBackToHome = () => {
     setCurrentScreen('landing');
+    window.history.pushState({}, '', '/');
   };
   
   // Handle back from leaderboard
   const handleBackFromLeaderboard = () => {
     setCurrentScreen('landing');
+    window.history.pushState({}, '', '/');
   };
-
-  // No longer need handleThemeChange as ThemeSelector now handles this directly
-  // using the applyTheme and saveTheme functions from the themes.js utility
-
+  
+  // Handle back to categories
+  const handleBackToCategories = () => {
+    setCurrentScreen('categorySelection');
+    window.history.pushState({}, '', '/category');
+  };
+  
   // Handle view leaderboard
   const handleViewLeaderboard = () => {
     setCurrentScreen('leaderboard');
+    window.history.pushState({}, '', '/leaderboard');
   };
-  
-  // Handle navbar leaderboard click
-  const onLeaderboardClick = () => {
-    setCurrentScreen('leaderboard');
-  };
-  
+
   // Handle back actions based on current screen
   const handleBack = () => {
     switch (currentScreen) {
-      case 'categories':
+      case 'quiz':
+        setCurrentScreen('difficultySelection');
+        // Optionally clear quizData and userAnswers here if needed
+        setQuizData(null);
+        setUserAnswers([]);
+        break;
+      case 'difficultySelection':
+        setCurrentScreen('categorySelection');
+        // Reset difficulty, amount, type if user goes back
+        setQuizOptions(prev => ({ ...prev, difficulty: '', amount: 5, type: 'multiple' }));
+        break;
+      case 'categorySelection':
+        setCurrentScreen('landing');
+        // Reset category info
+        setQuizOptions(prev => ({ ...prev, categoryId: '', categoryName: '' }));
+        break;
+      case 'registration': // Back from registration
         setCurrentScreen('landing');
         break;
-      case 'setup':
-        setCurrentScreen('categories');
+      case 'results': // Back from results page (handled by onHome in Results component)
+        setCurrentScreen('landing'); 
         break;
-      case 'leaderboard':
+      case 'leaderboard': // Back from leaderboard
         setCurrentScreen('landing');
         break;
       default:
@@ -192,80 +236,63 @@ function App() {
     <div className="app">
       <Navbar 
         username={username} 
-        onHomeClick={handleBackToHome}
-        onLeaderboardClick={onLeaderboardClick} 
+        onHomeClick={() => setCurrentScreen('landing')}
+        onLeaderboardClick={() => setCurrentScreen('leaderboard')}
         currentTheme={currentTheme}
+        onThemeChange={setCurrentTheme}
       />
       <div className="app-container">
-        {currentScreen === 'registration' && (
-          <UserRegistration 
-            onRegister={handleRegister} 
-            existingUsername={username} 
-          />
-        )}
-        
         {currentScreen === 'landing' && (
           <LandingPage 
             onStartQuiz={handleStartQuiz} 
             username={username}
           />
         )}
-        
-        {currentScreen === 'categories' && (
+        {currentScreen === 'registration' && (
+          <UserRegistration 
+            onRegister={handleRegister} 
+            existingUsername={username} 
+          />
+        )}
+        {currentScreen === 'categorySelection' && (
           <CategorySelection 
             categories={categories} 
-            onSelectCategory={handleCategorySelect}
-            onBack={handleBack}
+            onCategorySelected={handleCategorySelected} 
+            onBack={() => setCurrentScreen('landing')} 
           />
         )}
-        
-        {currentScreen === 'setup' && (
-          <QuizSetup 
-            categoryId={selectedCategory.id}
-            categoryName={selectedCategory.name}
-            onStartQuiz={handleQuizSetup}
-            onBack={handleBack}
+        {currentScreen === 'difficultySelection' && (
+          <DifficultySelection 
+            onDifficultySelected={handleDifficultySelected} 
+            onBack={() => setCurrentScreen('categorySelection')} 
+            categoryName={quizOptions.categoryName} 
           />
         )}
-        
-        {currentScreen === 'quiz' && (
-          <>
-            <header className="app-header">
-              <h1>{quizData?.quizTitle || 'Test Your Knowledge'}</h1>
-              <p className="app-subtitle">Good luck, {username}!</p>
-            </header>
-            <main className="app-main">
-              <QuizForm 
-                questions={quizData.questions} 
-                onComplete={handleQuizComplete} 
-              />
-            </main>
-          </>
+        {currentScreen === 'quiz' && quizData && (
+          <QuizForm 
+            quizData={quizData?.questions} 
+            userAnswers={userAnswers} 
+            onAnswerChange={setUserAnswers} 
+            onComplete={() => setCurrentScreen('results')} 
+          />
         )}
-        
-        {currentScreen === 'results' && (
-          <>
-            <header className="app-header">
-              <h1>Quiz Results</h1>
-              <p className="app-subtitle">Well done, {username}!</p>
-            </header>
-            <main className="app-main">
-              <Results 
-                questions={quizData.questions} 
-                userAnswers={userAnswers} 
-                onRestart={handleRestart}
-                onHome={handleBackToHome}
-                onViewLeaderboard={handleViewLeaderboard}
-              />
-            </main>
-          </>
+        {currentScreen === 'results' && quizData && (
+          <Results 
+            questions={quizData?.questions} 
+            userAnswers={userAnswers} 
+            onBack={() => setCurrentScreen('difficultySelection')} 
+            onRestart={() => {
+              setCurrentScreen('difficultySelection');
+              setUserAnswers([]);
+            }}
+            onHome={() => setCurrentScreen('landing')}
+            onViewLeaderboard={() => setCurrentScreen('leaderboard')}
+          />
         )}
-        
         {currentScreen === 'leaderboard' && (
           <Leaderboard 
             scores={scores} 
-            currentUsername={username} 
-            onBack={handleBackFromLeaderboard} 
+            onBack={() => setCurrentScreen('landing')} 
           />
         )}
       </div>

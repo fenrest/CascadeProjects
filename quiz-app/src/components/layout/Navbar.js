@@ -6,7 +6,7 @@ const Navbar = ({ onHomeClick, onLeaderboardClick, username, currentTheme, onThe
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="navbar-logo">
+        <div className="navbar-logo" onClick={(e) => { e.preventDefault(); onHomeClick && onHomeClick(); }}>
           <span className="logo-icon"></span>
           <h1 className="navbar-logo-text">Qurio</h1>
         </div>

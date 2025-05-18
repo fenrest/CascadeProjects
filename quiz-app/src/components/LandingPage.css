@@ -1,17 +1,38 @@
 /* LandingPage.css */
+
+.landing-button:active {
+  background-color: #f3f4f6; /* Slightly darker on active */
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 0 #e5e7eb, 0 3px 5px rgba(0, 0, 0, 0.1); /* Pressed 3D effect */
+}
 .landing-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* Background moved to App.css for full screen effect */
+  background: transparent; 
+}
 
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
 }
 
 .landing-content {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column; /* Changed to column */
+  align-items: center;    /* Center items horizontally */
+  justify-content: center; /* Center items vertically if needed */
+  text-align: center;     /* Ensure text within is centered */
   margin-bottom: 60px;
   min-height: 400px;
   gap: 40px;
@@ -19,27 +40,103 @@
 
 .landing-text {
   flex: 1;
-  max-width: 600px;
-  padding-right: 40px;
+  max-width: 800px; /* Allow more width if needed for centered text */
+  /* padding-right: 40px; Removed as it's not needed for centered column layout */
 }
 
-.landing-text h1 {
-  font-size: 3.5rem;
+.landing-text h1, .typing-title {
+  font-family: 'Lora', serif;
+  font-weight: 700; /* Lora bold */
+  font-size: 2.8rem; /* Reduced from 3.5rem */
   line-height: 1.2;
-  font-weight: 800;
   color: #0f172a;
   margin-bottom: 24px;
-  letter-spacing: -0.025em;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.025em; /* Restored */
+  /* text-align: center; -- Ensure this is handled by parent for centering the block */
+
+  /* Core properties for typing effect with pseudo-element caret */
+  display: inline-block;
+  position: relative; /* For pseudo-element caret positioning */
+  white-space: nowrap;
+  overflow: hidden; /* Restored for typing animation effect */
+  /* width is animated from 0 by @keyframes typing */
+  box-sizing: content-box; /* Width applies to content, padding is extra for caret */
+  padding-right: .15em; /* Space precisely for the .15em wide pseudo-caret */
+  
+  animation: typing 2.5s steps(31, end) forwards; /* Only typing animation here */
+}
+
+
+
+@keyframes typing {
+  from { width: 0; } /* Start from 0 width */
+  to { width: max-content; } /* Ensure it fits its actual content */
+}
+
+/* Pseudo-element caret style */
+.landing-text h1::after,
+.typing-title::after {
+  content: '';
+  position: absolute;
+  top: 0.1em; /* Adjust for vertical alignment as needed */
+  bottom: 0.1em; /* Adjust for vertical alignment as needed */
+  right: 0; /* Position in the padding-right of parent */
+  width: .15em; /* Caret thickness, matches padding-right */
+  background-color: #ff6b95; /* Caret color */
+  animation: blink-caret .75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { background-color: transparent; }
+  50% { background-color: #ff6b95; } /* Blink pseudo-element background */
 }
 
 .landing-title {
-  font-family: 'Playfair Display' serif;
+  font-family: 'Playfair Display', serif;
 
 
 }
 .landing-subtitle {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #4b5563;
+}
+
+/* Background decoration and floating shapes */
+.background-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.15;
+}
+
+.shape1 {
+  top: 15%;
+  right: 10%;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #ff6b95 0%, #ffa07a 100%);
+}
+
+.shape2 {
+  bottom: 20%;
+  left: 15%;
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, #6b95ff 0%, #7affd0 100%);
 }
 
 .landing-title {
@@ -65,91 +162,24 @@
 
 
 .landing-button {
-  background-color: #10b981;
-  color: white;
+  background-color: white;
+  color: #0f172a; /* Dark slate for text contrast */
   font-weight: 600;
   font-size: 1rem;
   padding: 16px 32px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Faster transition for hover/active */
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 0 0 #d1d5db, 0 5px 8px rgba(0, 0, 0, 0.1); /* 3D edge and soft shadow */
 }
 
 .landing-button:hover {
-  background-color: #059669;
+  background-color: #f9fafb; /* Slightly off-white on hover */
   transform: translateY(-2px);
-  box-shadow: 0 6px 10px rgba(16, 185, 129, 0.3);
-}
-
-.landing-image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.hero-graphic {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-illustration {
-  width: 100%;
-  height: 300px;
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 214, 224, 0.5);
-}
-
-.hero-illustration::before {
-  content: '';
-  position: absolute;
-  width: 150%;
-  height: 150%;
-  background: rgba(255, 214, 224, 0.15);
-  top: -25%;
-  left: -25%;
-  border-radius: 40%;
-  animation: rotate 20s linear infinite;
-}
-
-.hero-illustration::after {
-  content: '';
-  position: absolute;
-  width: 150%;
-  height: 150%;
-  background: rgba(255, 182, 193, 0.1);
-  top: -45%;
-  left: -10%;
-  border-radius: 40%;
-  animation: rotate 15s linear infinite reverse;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.landing-features {
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  margin-top: 40px;
+  box-shadow: 0 6px 0 0 #c0c0c0, 0 8px 12px rgba(0, 0, 0, 0.15); /* Adjusted 3D edge and shadow */
 }
 
 .feature {

@@ -57,7 +57,7 @@
 
 .setup-actions {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */ /* Removed for specific alignment */
   margin-top: 1rem;
 }
 
@@ -80,4 +80,5 @@
   background-color: var(--primary-color);
   color: white;
   border: none;
+  margin-left: auto; /* Push to the right */
 }

@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Question = ({ question, currentQuestion, totalQuestions, onAnswerSelect }) => {
+  const navigate = useNavigate();
   return (
     <div className="question-container">
       <div className="question-header">
@@ -18,6 +20,13 @@ const Question = ({ question, currentQuestion, totalQuestions, onAnswerSelect })
           </button>
         ))}
       </div>
+      <button 
+        onClick={() => navigate(-1)} 
+        className="button back-button question-back-button" 
+        style={{ marginTop: '20px' }} // Basic inline style, can be moved to CSS
+      >
+        Back
+      </button>
     </div>
   );
 };

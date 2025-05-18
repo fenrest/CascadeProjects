@@ -1,7 +1,7 @@
 import React from 'react';
 import './Results.css';
 
-const Results = ({ questions, userAnswers, onRestart, onHome, onViewLeaderboard }) => {
+const Results = ({ questions, userAnswers, onBack, onRestart, onHome, onViewLeaderboard }) => {
   const calculateScore = () => {
     let score = 0;
     questions.forEach((question, index) => {
@@ -44,13 +44,16 @@ const Results = ({ questions, userAnswers, onRestart, onHome, onViewLeaderboard 
       </div>
       
       <div className="results-actions">
-        <button className="restart-button" onClick={onRestart}>
+        <button className="results-button" onClick={onBack}>
+          Back
+        </button>
+        <button className="results-button" onClick={onRestart}>
           Take Quiz Again
         </button>
-        <button className="leaderboard-button" onClick={onViewLeaderboard}>
+        <button className="results-button" onClick={onViewLeaderboard}>
           View Leaderboard
         </button>
-        <button className="home-button" onClick={onHome}>
+        <button className="results-button home" onClick={onHome}>
           Back to Home
         </button>
       </div>

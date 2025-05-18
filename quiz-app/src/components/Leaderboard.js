@@ -19,10 +19,9 @@ const Leaderboard = ({ scores, currentUsername, onBack }) => {
       {sortedScores.length > 0 ? (
         <div className="scores-table">
           <div className="table-header">
-            <div className="rank-column">Rank</div>
-            <div className="username-column">Username</div>
-            <div className="score-column">Score</div>
-            <div className="date-column">Date</div>
+            <div className="username-column" style={{ textAlign: 'center' }}>Username</div>
+            <div className="score-column" style={{ textAlign: 'center' }}>Score</div>
+            <div className="date-column" style={{ textAlign: 'center' }}>Date</div>
           </div>
           
           {sortedScores.map((score, index) => (
@@ -33,10 +32,9 @@ const Leaderboard = ({ scores, currentUsername, onBack }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
             >
-              <div className="rank-column">{index + 1}</div>
-              <div className="username-column">{score.username}</div>
-              <div className="score-column">{score.score}%</div>
-              <div className="date-column">{new Date(score.date).toLocaleDateString()}</div>
+              <div className="username-column" style={{ textAlign: 'center' }}>{score.username}</div>
+              <div className="score-column" style={{ textAlign: 'center' }}>{score.score}%</div>
+              <div className="date-column" style={{ textAlign: 'center' }}>{new Date(score.date).toLocaleDateString()}</div>
             </motion.div>
           ))}
         </div>

@@ -98,39 +98,41 @@
   justify-content: center;
   gap: 1rem;
   margin-top: 2rem;
+  padding: 0 1rem;
+  flex-wrap: wrap;
 }
 
-.restart-button, .leaderboard-button, .home-button {
-  padding: 0.8rem 1.5rem;
+.results-button {
+  width: 120px;
+  height: 40px;
   font-size: 1rem;
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-}
-
-.restart-button {
-  background-color: var(--primary-color);
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   border: none;
-}
-
-.leaderboard-button {
-  background-color: var(--secondary-color);
+  background-color: #ff69b4;
   color: white;
-  border: none;
 }
 
-.home-button {
-  background-color: var(--neutral-100);
-  color: var(--neutral-700);
-  border: 1px solid var(--neutral-300);
+.results-button.home {
+  background-color: #ffffff;
+  color: #333333;
+  border: 1px solid #333333;
 }
 
-.restart-button:hover, .home-button:hover {
+.results-button:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.restart-button:active, .home-button:active {
+.results-button:active {
   transform: translateY(0);
+  box-shadow: none;
 }

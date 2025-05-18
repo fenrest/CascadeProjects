@@ -99,4 +99,4 @@ export const initializeDatabase = () => {
 };
 
 // Call initialization
-initializeDatabase();
+// initializeDatabase(); // Removed to prevent pre-filling with sample scores

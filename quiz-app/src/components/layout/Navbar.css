@@ -23,6 +23,13 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar-logo:hover {
+  transform: translateY(-2px);
+  color: var(--primary-color);
 }
 
 .logo-icon {
@@ -37,8 +44,9 @@
 }
 
 .navbar-logo h1, .navbar-logo-text {
+  font-family: 'Lora', serif;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 700; /* Lora bold */
   margin: 0;
   color: var(--logo-text);
 }
