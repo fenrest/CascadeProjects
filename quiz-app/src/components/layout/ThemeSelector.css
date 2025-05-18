@@ -1,0 +1,162 @@
+/* ThemeSelector Component for the footer */
+
+.theme-selector {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Button styling */
+.theme-selector-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: 1px solid var(--footer-text);
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--footer-text);
+  transition: all 0.2s ease;
+}
+
+/* Hover and focus states */
+.theme-selector-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-selector-button:focus {
+  outline: 2px solid var(--footer-text);
+  outline-offset: 2px;
+}
+
+/* Theme icon */
+.theme-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Dropdown menu - positioned to open upwards */
+.theme-dropdown {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 10px;
+  background-color: #222; /* dark background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 200px;
+  z-index: 1000;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+.theme-dropdown, .theme-dropdown * {
+  color: #fff !important;
+}
+
+.theme-option {
+  color: #fff !important;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 12px 18px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.15s;
+}
+
+.theme-option:hover, .theme-option:focus {
+  background: rgba(255,255,255,0.08);
+  color: #fff !important;
+  outline: none;
+}
+
+/* Animation for dropdown */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Theme option buttons */
+.theme-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: left;
+  gap: 10px;
+  transition: background-color 0.2s ease;
+  color: #333333;
+}
+
+/* Hover and active states */
+.theme-option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.theme-option:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.theme-option.active {
+  background-color: rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+}
+
+/* Theme color preview */
+.theme-color-preview {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.theme-option-name {
+  font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-dropdown {
+    width: 180px;
+  }
+  
+  .theme-selector-button {
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-name {
+    display: none; /* Hide text on very small screens */
+  }
+  
+  .theme-selector-button {
+    padding: 6px;
+    border-radius: 50%;
+  }
+  
+  .theme-icon {
+    margin: 0;
+  }
+  
+  .theme-dropdown {
+    width: 160px;
+    right: -5px;
+  }
+}

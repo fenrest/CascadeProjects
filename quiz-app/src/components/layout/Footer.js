@@ -1,8 +1,8 @@
 import React from 'react';
 import './Footer.css';
+import ThemeSelector from './ThemeSelector';
 
-
-const Footer = () => {
+const Footer = ({ currentTheme }) => {
   const currentYear = new Date().getFullYear();
   
   return (
@@ -10,36 +10,28 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-section">
           <h3>Qurio</h3>
-          <p>Test your knowledge with our fun and challenging quizzes!</p>
-        
-            
-          
+          <p>Test your knowledge with fun quizzes!</p>
         </div>
         
         <div className="footer-section">
-          <h4>Quick Links</h4>
+          <h3>Links</h3>
           <ul className="footer-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
           </ul>
         </div>
         
+
         <div className="footer-section">
-          <h4>Categories</h4>
-          <ul className="footer-links">
-            <li><a href="/category/9">General Knowledge</a></li>
-            <li><a href="/category/17">Science</a></li>
-            <li><a href="/category/23">History</a></li>
-            <li><a href="/category/21">Sports</a></li>
-          </ul>
+          <h3>Theme</h3>
+          <ThemeSelector currentTheme={currentTheme} />
         </div>
       </div>
       
       <div className="footer-bottom">
         <p>&copy; {currentYear} Qurio. All rights reserved.</p>
-        <p>Powered by <a href="https://opentdb.com/" target="_blank" rel="noopener noreferrer">Open Trivia Database</a></p>
       </div>
     </footer>
   );

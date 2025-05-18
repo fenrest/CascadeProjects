@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import LandingPage from './components/LandingPage';
 import QuizForm from './components/QuizForm';
+import Results from './components/Results';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import LandingPage from './components/LandingPage';
-import Results from './components/Results';
 import UserRegistration from './components/UserRegistration';
 import CategorySelection from './components/CategorySelection';
 import QuizSetup from './components/QuizSetup';
 import Leaderboard from './components/Leaderboard';
-
+import { getUsername, saveUsername } from './utils/storage';
 import { fetchQuizData, fetchCategories } from './services/api';
-import { getUsername, saveUsername, getScores, saveScore } from './utils/storage';
+import { getTheme, applyTheme, initializeThemeSystem } from './utils/themes';
+import { getAllScores, saveScoreToDb, getUserScores, getTopScores } from './utils/database';
 
 function App() {
   // Quiz data and answers
@@ -22,7 +23,18 @@ function App() {
   
   // User data
   const [username, setUsername] = useState(getUsername() || '');
-  const [scores, setScores] = useState(getScores());
+  const [scores, setScores] = useState(getAllScores());
+  
+  // Theme data
+  const [currentTheme, setCurrentTheme] = useState(getTheme());
+  
+  // Initialize theme system with the current theme
+  useEffect(() => {
+    // Apply the current theme on initial load
+    applyTheme(currentTheme);
+    // Initialize the theme system for system preference detection
+    initializeThemeSystem();
+  }, []);
   
   // Selected category for quiz
   const [selectedCategory, setSelectedCategory] = useState({
@@ -39,9 +51,7 @@ function App() {
   });
   
   // App screens
-  const [currentScreen, setCurrentScreen] = useState(
-    username ? 'landing' : 'registration'
-  );
+  const [currentScreen, setCurrentScreen] = useState('landing');
 
   useEffect(() => {
     // Load available categories when component mounts
@@ -79,7 +89,12 @@ function App() {
   
   // Handle start quiz from landing page
   const handleStartQuiz = () => {
-    setCurrentScreen('categories');
+    // Check if user has a username, if not redirect to registration
+    if (!username) {
+      setCurrentScreen('registration');
+    } else {
+      setCurrentScreen('categories');
+    }
   };
   
   // Handle category selection
@@ -110,13 +125,15 @@ function App() {
     const percentage = Math.round((score / quizData.questions.length) * 100);
     
     // Save score to leaderboard
-    const updatedScores = saveScore(
+    const scoreData = {
       username,
-      percentage,
-      selectedCategory.name,
-      quizOptions.difficulty || 'Any'
-    );
+      score: percentage,
+      category: selectedCategory.name,
+      difficulty: quizOptions.difficulty || 'Any',
+      date: new Date().toISOString()
+    };
     
+    const updatedScores = saveScoreToDb(scoreData);
     setScores(updatedScores);
     setCurrentScreen('results');
   };
@@ -127,14 +144,26 @@ function App() {
     setCurrentScreen('setup');
   };
   
-  // Handle back to home
+  // Handle back to home or previous screen
   const handleBackToHome = () => {
     setCurrentScreen('landing');
-    setUserAnswers([]);
   };
   
+  // Handle back from leaderboard
+  const handleBackFromLeaderboard = () => {
+    setCurrentScreen('landing');
+  };
+
+  // No longer need handleThemeChange as ThemeSelector now handles this directly
+  // using the applyTheme and saveTheme functions from the themes.js utility
+
   // Handle view leaderboard
   const handleViewLeaderboard = () => {
+    setCurrentScreen('leaderboard');
+  };
+  
+  // Handle navbar leaderboard click
+  const onLeaderboardClick = () => {
     setCurrentScreen('leaderboard');
   };
   
@@ -160,11 +189,12 @@ function App() {
   }
 
   return (
-    <div className="app-wrapper">
+    <div className="app">
       <Navbar 
-        onHomeClick={handleBackToHome} 
-        onLeaderboardClick={handleViewLeaderboard}
-        username={username}
+        username={username} 
+        onHomeClick={handleBackToHome}
+        onLeaderboardClick={onLeaderboardClick} 
+        currentTheme={currentTheme}
       />
       <div className="app-container">
         {currentScreen === 'registration' && (
@@ -235,11 +265,13 @@ function App() {
           <Leaderboard 
             scores={scores} 
             currentUsername={username} 
-            onBack={handleBack} 
+            onBack={handleBackFromLeaderboard} 
           />
         )}
       </div>
-      <Footer />
+      <Footer 
+        currentTheme={currentTheme} 
+      />
     </div>
   );
 }
