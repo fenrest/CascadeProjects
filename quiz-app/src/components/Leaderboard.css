@@ -1,0 +1,105 @@
+.leaderboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.leaderboard-container h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.leaderboard-subtitle {
+  font-size: 1.1rem;
+  color: var(--neutral-600);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.scores-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr;
+  padding: 1rem;
+  border-bottom: 1px solid var(--neutral-200);
+  background-color: var(--neutral-50);
+  transition: background-color 0.2s ease;
+}
+
+.table-row:nth-child(even) {
+  background-color: white;
+}
+
+.table-row:hover {
+  background-color: var(--neutral-100);
+}
+
+.current-user {
+  background-color: rgba(94, 70, 133, 0.1) !important;
+  font-weight: 600;
+}
+
+.rank-column {
+  text-align: center;
+  font-weight: 600;
+}
+
+.username-column {
+  font-weight: 500;
+}
+
+.score-column {
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.date-column {
+  text-align: right;
+  color: var(--neutral-600);
+  font-size: 0.9rem;
+}
+
+.no-scores {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--neutral-50);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  color: var(--neutral-600);
+}
+
+.back-button {
+  display: block;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--neutral-100);
+  color: var(--neutral-700);
+  border: 1px solid var(--neutral-300);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}

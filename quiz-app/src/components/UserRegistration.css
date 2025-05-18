@@ -1,0 +1,81 @@
+.user-registration {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.user-registration h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.registration-subtitle {
+  font-size: 1.1rem;
+  color: var(--neutral-600);
+  margin-bottom: 2rem;
+}
+
+.username-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.username-form input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 2px solid var(--neutral-200);
+  border-radius: 8px;
+  background-color: var(--neutral-50);
+  transition: all 0.3s ease;
+}
+
+.username-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(94, 70, 133, 0.1);
+}
+
+.username-form input.error {
+  border-color: var(--danger-color);
+}
+
+.error-message {
+  color: var(--danger-color);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+.register-button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.register-button:disabled {
+  background-color: var(--neutral-300);
+  cursor: not-allowed;
+}
+
+.data-notice {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--neutral-500);
+}

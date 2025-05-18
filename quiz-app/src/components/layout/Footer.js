@@ -1,6 +1,7 @@
 import React from 'react';
 import './Footer.css';
 
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
@@ -8,19 +9,11 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>Trivia Master <span className="footer-emoji">🧠</span></h3>
+          <h3>Qurio</h3>
           <p>Test your knowledge with our fun and challenging quizzes!</p>
-          <div className="social-links">
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-              <span className="social-icon">🐦</span>
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <span className="social-icon">📘</span>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <span className="social-icon">📷</span>
-            </a>
-          </div>
+        
+            
+          
         </div>
         
         <div className="footer-section">
@@ -45,7 +38,7 @@ const Footer = () => {
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; {currentYear} Trivia Master. All rights reserved.</p>
+        <p>&copy; {currentYear} Qurio. All rights reserved.</p>
         <p>Powered by <a href="https://opentdb.com/" target="_blank" rel="noopener noreferrer">Open Trivia Database</a></p>
       </div>
     </footer>

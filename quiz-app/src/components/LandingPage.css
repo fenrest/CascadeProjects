@@ -11,8 +11,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 80px;
-  min-height: 500px;
+  margin-bottom: 60px;
+  min-height: 400px;
+  gap: 40px;
 }
 
 .landing-text {
@@ -28,6 +29,7 @@
   color: #0f172a;
   margin-bottom: 24px;
   letter-spacing: -0.025em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .landing-title {
@@ -53,7 +55,13 @@
   line-height: 1.6;
   color: #475569;
   margin-bottom: 40px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+.typing-title {
+  min-height: 4rem;
+}
+
 
 .landing-button {
   background-color: #10b981;
@@ -84,78 +92,55 @@
   position: relative;
 }
 
-.image-collage {
+.hero-graphic {
   width: 100%;
-  height: 400px;
-  position: relative;
-}
-
-.collage-item {
-  position: absolute;
-  border-radius: 16px;
-  background-color: #f8fafc;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+
+.hero-illustration {
+  width: 100%;
+  height: 300px;
+  background-color: #f8fafc;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease;
 }
 
-.collage-item:hover {
-  transform: translateY(-5px);
+.hero-illustration::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: rgba(94, 70, 133, 0.05);
+  top: -25%;
+  left: -25%;
+  border-radius: 40%;
+  animation: rotate 20s linear infinite;
 }
 
-.emoji-icon {
-  font-size: 3rem;
+.hero-illustration::after {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: rgba(16, 185, 129, 0.05);
+  top: -45%;
+  left: -10%;
+  border-radius: 40%;
+  animation: rotate 15s linear infinite reverse;
 }
 
-.item-1 {
-  width: 150px;
-  height: 150px;
-  top: 0;
-  left: 10%;
-  background-color: #ede9fe;
-}
-
-.item-2 {
-  width: 120px;
-  height: 120px;
-  top: 20%;
-  right: 10%;
-  background-color: #e0f2fe;
-}
-
-.item-3 {
-  width: 180px;
-  height: 180px;
-  bottom: 10%;
-  left: 20%;
-  background-color: #dcfce7;
-}
-
-.item-4 {
-  width: 100px;
-  height: 100px;
-  top: 50%;
-  left: 40%;
-  background-color: #fef3c7;
-}
-
-.item-5 {
-  width: 140px;
-  height: 140px;
-  bottom: 30%;
-  right: 15%;
-  background-color: #ffedd5;
-}
-
-.item-6 {
-  width: 90px;
-  height: 90px;
-  top: 10%;
-  left: 50%;
-  background-color: #fee2e2;
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .landing-features {
@@ -180,8 +165,50 @@
 }
 
 .feature-icon {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.feature-icon::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(94, 70, 133, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature-icon::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.feature-icon-categories::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235e4685' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6h18'/%3E%3Cpath d='M3 12h18'/%3E%3Cpath d='M3 18h18'/%3E%3C/svg%3E");
+}
+
+.feature-icon-quick::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235e4685' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 6 12 12 16 14'/%3E%3C/svg%3E");
+}
+
+.feature-icon-progress::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235e4685' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='20' x2='18' y2='10'/%3E%3Cline x1='12' y1='20' x2='12' y2='4'/%3E%3Cline x1='6' y1='20' x2='6' y2='14'/%3E%3C/svg%3E");
+}
+
+.feature:hover .feature-icon::before {
+  transform: scale(1.1);
 }
 
 .feature h3 {
