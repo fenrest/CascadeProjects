@@ -1,12 +1,12 @@
 /* App.css - Modern styling for the Open Trivia DB Quiz App */
 
 :root {
-  --primary-color: #5e4685; /* Purple */
-  --primary-light: #7c3aed;
-  --primary-dark: #4c1d95;
-  --secondary-color: #10b981; /* Green */
-  --secondary-light: #34d399;
-  --secondary-dark: #059669;
+  --primary-color: #ff9fb6; /* Pastel Pink */
+  --primary-light: #ffc2d1;
+  --primary-dark: #ff7a97;
+  --secondary-color: #ff9fb6; /* Pastel Pink */
+  --secondary-light: #ffc2d1;
+  --secondary-dark: #ff7a97;
   --neutral-50: #fafafa;
   --neutral-100: #f5f5f5;
   --neutral-200: #e5e5e5;
@@ -29,7 +29,7 @@
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #ffd6e0 0%, #ffffff 100%);
   background-attachment: fixed;
 }
 
