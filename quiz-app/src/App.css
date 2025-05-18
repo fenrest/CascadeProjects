@@ -29,8 +29,7 @@
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: var(--neutral-50);
-  background-image: url('./assets/images/quiz-pattern.svg');
+  background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
   background-attachment: fixed;
 }
 

@@ -1,0 +1,136 @@
+.results-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.results-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.score-summary {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.score-summary p {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.percentage {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.percentage[data-score="perfect"] {
+  color: #10b981;
+}
+
+.percentage[data-score="excellent"] {
+  color: #3b82f6;
+}
+
+.percentage[data-score="good"] {
+  color: #8b5cf6;
+}
+
+.percentage[data-score="average"] {
+  color: #f59e0b;
+}
+
+.percentage[data-score="poor"] {
+  color: #ef4444;
+}
+
+.answers-review {
+  margin-bottom: 2rem;
+}
+
+.answers-review h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--neutral-700);
+}
+
+.question-review {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: var(--neutral-50);
+}
+
+.question-review.correct {
+  border-left: 4px solid var(--success-color);
+}
+
+.question-review.incorrect {
+  border-left: 4px solid var(--danger-color);
+}
+
+.question-text {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.your-answer {
+  margin-bottom: 0.25rem;
+}
+
+.your-answer, .correct-answer {
+  font-size: 0.95rem;
+}
+
+.correct-answer {
+  color: var(--success-color);
+  font-weight: 500;
+}
+
+.results-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.restart-button, .leaderboard-button, .home-button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.restart-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.leaderboard-button {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+}
+
+.home-button {
+  background-color: var(--neutral-100);
+  color: var(--neutral-700);
+  border: 1px solid var(--neutral-300);
+}
+
+.restart-button:hover, .home-button:hover {
+  transform: translateY(-2px);
+}
+
+.restart-button:active, .home-button:active {
+  transform: translateY(0);
+}

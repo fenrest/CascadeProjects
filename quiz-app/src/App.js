@@ -225,6 +225,7 @@ function App() {
                 userAnswers={userAnswers} 
                 onRestart={handleRestart}
                 onHome={handleBackToHome}
+                onViewLeaderboard={handleViewLeaderboard}
               />
             </main>
           </>

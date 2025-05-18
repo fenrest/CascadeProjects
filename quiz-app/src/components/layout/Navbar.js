@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 
-const Navbar = ({ onHomeClick }) => {
+const Navbar = ({ onHomeClick, onLeaderboardClick, username }) => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -14,13 +14,17 @@ const Navbar = ({ onHomeClick }) => {
             <span className="nav-icon"></span>
             Home
           </a>
-          <a href="/leaderboard" className="nav-link">
+          <a href="#" onClick={(e) => { e.preventDefault(); onLeaderboardClick && onLeaderboardClick(); }} className="nav-link">
             <span className="nav-icon"></span>
             Leaderboard
           </a>
-         
-         
         </div>
+        
+        {username && (
+          <div className="user-info">
+            <span className="username">Hi, {username}</span>
+          </div>
+        )}
       </div>
     </nav>
   );

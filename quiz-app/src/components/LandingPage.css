@@ -4,6 +4,9 @@
   margin: 0 auto;
   padding: 40px 20px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #ffd6e0 0%, #ffffff 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .landing-content {
@@ -103,11 +106,12 @@
 .hero-illustration {
   width: 100%;
   height: 300px;
-  background-color: #f8fafc;
+  background-color: #ffffff;
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 214, 224, 0.5);
 }
 
 .hero-illustration::before {
@@ -115,7 +119,7 @@
   position: absolute;
   width: 150%;
   height: 150%;
-  background: rgba(94, 70, 133, 0.05);
+  background: rgba(255, 214, 224, 0.15);
   top: -25%;
   left: -25%;
   border-radius: 40%;
@@ -127,7 +131,7 @@
   position: absolute;
   width: 150%;
   height: 150%;
-  background: rgba(16, 185, 129, 0.05);
+  background: rgba(255, 182, 193, 0.1);
   top: -45%;
   left: -10%;
   border-radius: 40%;

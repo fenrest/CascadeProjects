@@ -9,12 +9,13 @@
 }
 
 .navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 0 20px;
+  height: 100%;
 }
 
 .navbar-logo {
@@ -48,6 +49,19 @@
 .navbar-links {
   display: flex;
   gap: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.username {
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .nav-link {
