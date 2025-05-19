@@ -25,9 +25,9 @@ const QuizForm = ({ quizData, onSubmit, onBack, onComplete }) => {
     }
   };
   
-  const handleBack = () => {
-    if (typeof onBack === 'function') {
-      onBack();
+  const handlePreviousQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
   
@@ -38,13 +38,6 @@ const QuizForm = ({ quizData, onSubmit, onBack, onComplete }) => {
   return (
     <div className="quiz-form">
       <div className="quiz-header">
-        <button 
-          type="button" 
-          onClick={handleBack} 
-          className="button back-button quiz-back-button"
-        >
-          Back to Settings
-        </button>
         <div className="quiz-progress">
           Question {currentQuestionIndex + 1} of {questions.length}
         </div>
@@ -55,6 +48,7 @@ const QuizForm = ({ quizData, onSubmit, onBack, onComplete }) => {
         currentQuestion={currentQuestionIndex}
         totalQuestions={questions.length}
         onAnswerSelect={handleAnswerSelect}
+        onPreviousQuestion={handlePreviousQuestion}
       />
     </div>
   );

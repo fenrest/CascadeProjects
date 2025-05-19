@@ -8,8 +8,8 @@ const LandingPage = ({ onStartQuiz, username }) => {
   const [showButton, setShowButton] = useState(false);
 useEffect(() => {
     // Stagger the animations
-    const subtitleTimer = setTimeout(() => setShowSubtitle(true), 2000);
-    const buttonTimer = setTimeout(() => setShowButton(true), 3500);
+    const subtitleTimer = setTimeout(() => setShowSubtitle(true), 1500);
+    const buttonTimer = setTimeout(() => setShowButton(true), 2500);
     
     return () => {
       clearTimeout(subtitleTimer);
@@ -52,7 +52,7 @@ useEffect(() => {
         type: 'spring',
         stiffness: 300,
         damping: 12,
-        delay: 0.5 
+        delay: 0.2 
       }
     },
     hover: { 

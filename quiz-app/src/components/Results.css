@@ -96,43 +96,105 @@
 .results-actions {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
   padding: 0 1rem;
   flex-wrap: wrap;
 }
 
 .results-button {
-  width: 120px;
-  height: 40px;
+  width: 140px;
+  height: 48px;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  padding: 0 1rem;
   margin: 0;
   box-sizing: border-box;
-  border: none;
-  background-color: #ff69b4;
-  color: white;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
 
-.results-button.home {
-  background-color: #ffffff;
-  color: #333333;
-  border: 1px solid #333333;
+.button-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.results-button.primary {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--primary);
+}
+
+.results-button.secondary {
+  background: var(--secondary);
+  color: var(--button-text);
+  border-color: var(--secondary);
+}
+
+.results-button.tertiary {
+  background: var(--accent);
+  color: var(--button-text);
+  border-color: var(--accent);
+}
+
+[data-theme="monochrome"] .results-button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-color: var(--border);
+}
+
+[data-theme="monochrome"] .results-button.primary {
+  background: var(--primary);
+}
+
+[data-theme="monochrome"] .results-button.secondary {
+  background: var(--secondary);
+}
+
+[data-theme="monochrome"] .results-button.tertiary {
+  background: var(--accent);
+}
+
+.results-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
 }
 
 .results-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.results-button:hover::before {
+  left: 100%;
 }
 
 .results-button:active {
   transform: translateY(0);
   box-shadow: none;
+}
+
+.results-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }

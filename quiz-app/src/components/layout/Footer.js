@@ -6,8 +6,10 @@ const Footer = ({ currentTheme }) => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        <div className="footer-brand">
-          <p>Made by Fern</p>
+        <div className="footer-content">
+          <div className="footer-brand">
+            <p>Made by Fern</p>
+          </div>
         </div>
         <div className="footer-theme-selector">
           <ThemeSelector currentTheme={currentTheme} />

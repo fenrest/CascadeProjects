@@ -44,17 +44,14 @@ const Results = ({ questions, userAnswers, onBack, onRestart, onHome, onViewLead
       </div>
       
       <div className="results-actions">
-        <button className="results-button" onClick={onBack}>
-          Back
-        </button>
-        <button className="results-button" onClick={onRestart}>
+        <button className="results-button primary" onClick={onRestart}>
           Take Quiz Again
         </button>
-        <button className="results-button" onClick={onViewLeaderboard}>
+        <button className="results-button secondary" onClick={onViewLeaderboard}>
           View Leaderboard
         </button>
-        <button className="results-button home" onClick={onHome}>
-          Back to Home
+        <button className="results-button tertiary" onClick={onHome}>
+          Home
         </button>
       </div>
     </div>

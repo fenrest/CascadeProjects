@@ -83,10 +83,26 @@
 .category-actions {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 2rem;
+  width: 100%;
 }
 
-.back-button, .random-button {
+.left-align {
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.random-button{
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   font-weight: 600;
@@ -100,6 +116,7 @@
   color: var(--neutral-700);
   border: 1px solid var(--neutral-300);
 }
+
 
 .random-button {
   background-color: var(--secondary-color);

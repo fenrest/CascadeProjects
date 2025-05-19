@@ -56,14 +56,16 @@ const CategorySelection = ({ categories, onCategorySelected, onBack }) => {
       </div>
       
       <div className="category-actions">
-           <motion.button 
-             className="back-button"
-             onClick={() => onBack()}
-             whileHover={{ scale: 1.05 }}
-             whileTap={{ scale: 0.95 }}
-           >
-             Back
-           </motion.button>
+        <div className="left-align">
+          <motion.button 
+            className="back-button"
+            onClick={() => onBack()}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Back
+          </motion.button>
+        </div>
         <motion.button 
           className="random-button"
           onClick={() => onCategorySelected('', 'Random')}

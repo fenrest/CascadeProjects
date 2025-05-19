@@ -1,10 +1,14 @@
 .footer {
-  background-color: white; /* Or var(--footer-bg) if you have it */
-  color: #333333; /* Or var(--footer-text-color) */
-  padding: 1.5rem 20px; /* Adjusted padding */
-  margin-top: 4rem;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* Or var(--shadow) */
-  border-top: 1px solid #e5e5e5; /* Optional: if you want a top border */
+  background-color: white;
+  color: #333333;
+  padding: 0.5rem 20px 1.5rem;
+  margin-top: 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  border-top: 1px solid #e5e5e5;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
 }
 
 .footer-container {
@@ -13,11 +17,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.footer-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
 }
 
 .footer-brand {
   text-align: center;
-  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #525252;
+  margin: 0;
 }
 
 .footer-brand p {
@@ -27,8 +42,11 @@
 }
 
 .footer-theme-selector {
-  flex-shrink: 0;
-  margin-left: auto;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 .footer-brand p {

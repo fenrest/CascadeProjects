@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './DifficultySelection.css';
 
-const DifficultySelection = ({ categoryName, onDifficultySelected }) => {
+const DifficultySelection = ({ categoryName, onDifficultySelected, onBack }) => {
+  // Handle browser back button
+  useEffect(() => {
+    const handlePopState = () => {
+      if (typeof onBack === 'function') {
+        onBack();
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [onBack]);
   const handleBack = () => {
+    // Update browser history when user clicks back button
     window.history.back();
+    if (typeof onBack === 'function') {
+      onBack();
+    }
   };
   const [difficulty, setDifficulty] = useState('medium'); // Default difficulty
   const [amount, setAmount] = useState(10); // Default number of questions

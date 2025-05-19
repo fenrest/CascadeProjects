@@ -100,3 +100,7 @@ export const initializeDatabase = () => {
 
 // Call initialization
 // initializeDatabase(); // Removed to prevent pre-filling with sample scores
+
+// Clear all database data
+localStorage.removeItem(DB_KEYS.SCORES);
+localStorage.removeItem(DB_KEYS.USERS);

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import './Question.css';
 
-const Question = ({ question, currentQuestion, totalQuestions, onAnswerSelect }) => {
-  const navigate = useNavigate();
+const Question = ({ question, currentQuestion, totalQuestions, onAnswerSelect, onPreviousQuestion }) => {
+  // Using window.history.back() instead of useNavigate
   return (
     <div className="question-container">
       <div className="question-header">
@@ -21,11 +21,12 @@ const Question = ({ question, currentQuestion, totalQuestions, onAnswerSelect })
         ))}
       </div>
       <button 
-        onClick={() => navigate(-1)} 
-        className="button back-button question-back-button" 
+        onClick={onPreviousQuestion} 
+        disabled={currentQuestion === 0}
+        className="button previous-button" 
         style={{ marginTop: '20px' }} // Basic inline style, can be moved to CSS
       >
-        Back
+        <span className="button-text">Previous Question</span>
       </button>
     </div>
   );
